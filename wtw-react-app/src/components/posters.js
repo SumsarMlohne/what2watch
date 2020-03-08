@@ -9,7 +9,7 @@ const Suggestions = (props) => {
             <Image className="d-block w-80 text-center" src={r.Poster} rounded style={{margin: 'auto'}}></Image>
         </Carousel.Item>   
     ))
-    return <Carousel>{options}</Carousel>
+    return <Carousel controls={false}>{options}</Carousel>
 }
 
 

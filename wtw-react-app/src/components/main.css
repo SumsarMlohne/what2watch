@@ -17,3 +17,14 @@ li{
     text-decoration: none;
     background: #100972;
 }
+
+#galleryposter{
+    transition: transform .5s ;
+}
+#galleryposter:hover{
+    transform: scale(.97);
+    cursor: pointer;
+}
+h2{
+    color: #187C73
+}
