@@ -1,0 +1,1 @@
+remove "related titles to" and make suggestions show up with posters that are clickable

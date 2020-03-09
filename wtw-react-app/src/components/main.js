@@ -4,11 +4,11 @@ import './main.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'; 
-import {FormControl, FormGroup, Button, ListGroup, Carousel, Image} from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
+import {FormControl, FormGroup, Button, Image, InputGroup} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Posters from './posters';
 import Moviegallery from './moviegallery';
+import Suggestions from './suggestions';
 
 
 class Main extends Component{
@@ -28,10 +28,24 @@ class Main extends Component{
             firstMoviePoster: '',
             results: [],
             showGallery: false,
+            suggestions: []
         }
     }
 
-    
+    getSuggestions = () => {
+        Axios.get('http://www.omdbapi.com/?apikey=876cadf8&type=movie&s=' + this.searchValue.value)
+            .then((Response) => {
+                console.log('suggestions', Response)             
+                this.setState({
+                    suggestions: Response.data.Search
+                })
+            })
+            .catch((e)=>{
+                console.log(e)
+            })
+
+            
+    }
 
     getMovie = () => {
         Axios.get('http://www.omdbapi.com/?apikey=876cadf8&s=' + this.searchValue.value)
@@ -93,6 +107,11 @@ class Main extends Component{
         })
     }
 
+    handleKeyPress = (target) => {
+        if(target.charCode===13){
+            this.handleButtonPress()
+        }
+    }
 
     render(){
 
@@ -118,8 +137,17 @@ class Main extends Component{
                     </Col>
                     <Col sm={8}>
                         <FormGroup onSubmit={this.handleButtonPress}>
-                            <FormControl type="text"  ref={input => this.searchValue = input} placeholder="Ex. Star Wars" id="search" ></FormControl> 
-                            <br />     
+                            <InputGroup className="mb-3">
+                            <FormControl type="text"  ref={input => this.searchValue = input} placeholder="Ex. Star Wars" id="search" onChange={this.getSuggestions} onKeyPress={this.handleKeyPress} ></FormControl> 
+                            <br />   
+                            <InputGroup.Append>
+                                <Button type="button" block variant="dark"  onClick={this.handleButtonPress} >Search</Button>
+                            </InputGroup.Append>
+                            
+                        </InputGroup>
+                            {/*Gets suggestions from the database and displays in a list under the search bar */}
+                            <Suggestions listOfSuggestions={this.state.suggestions} />
+
                             <Button type="button" block variant="info" style={{marginTop: '1em', marginBottom: '1em'}} onClick={this.onOpenModal}>
                              Show Current Search
                             </Button>
@@ -131,9 +159,8 @@ class Main extends Component{
                         
                         <br />
                     </Col>
-                    <Col sm={2}>
-                        <Button type="button" block variant="dark"  onClick={this.handleButtonPress} >Search</Button>
-                        
+                    <Col sm={2}>                                           
+                                              
                     </Col>
                 </Row>
             </Container>

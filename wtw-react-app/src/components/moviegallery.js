@@ -1,6 +1,6 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import Main from './main';
-import { Button, Container, Row, Col, Image, Modal } from 'react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import GenerateGalleryPoster from './generateGalleryPoster';
 import './main.css';
 
@@ -26,7 +26,7 @@ class Moviegallery extends Component{
     
     render(){
 
-        const {goBack, toGallery} = this.state;
+        const {goBack} = this.state;
 
         if(!goBack){
 

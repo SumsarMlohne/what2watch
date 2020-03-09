@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import './main.css';
-import { ListGroup, Image, Carousel, Row, Col, Container, Modal, Button } from 'react-bootstrap';
+import { Image, Row, Col, Button } from 'react-bootstrap';
 import GModal from './galleryModal';
-import Main from './main';
 
 const GGPoster = (props) => {
     const [hideInfo, setInfo] = useState(true);
-    const [gotoMain, setGotoMain] = useState(false);
     console.log("Galleryposter", props.galleryPoster);
     const galleryItem = 
             <Col sm={4}>

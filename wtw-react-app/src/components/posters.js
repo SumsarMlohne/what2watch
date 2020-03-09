@@ -1,6 +1,6 @@
 import React from 'react';
 import './main.css';
-import { ListGroup, Image, Carousel } from 'react-bootstrap';
+import { Image, Carousel } from 'react-bootstrap';
 
 
 const Suggestions = (props) => {
