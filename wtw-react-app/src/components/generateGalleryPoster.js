@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './main.css';
-import { Image, Row, Col, Button } from 'react-bootstrap';
+import { Image, Row, Col, Button, Container } from 'react-bootstrap';
 import GModal from './galleryModal';
 
 const GGPoster = (props) => {
@@ -14,11 +14,11 @@ const GGPoster = (props) => {
     if(!hideInfo){
         return <div className="modalinfo">
                     <GModal modalInfo={props.galleryPoster} />
-                    <Button type="button" block variant="primary" size="lg" onClick={() => setInfo(true)}>Back to Gallery</Button>
+                    <Button type="button" block variant="primary" size="lg" onClick={() => setInfo(true)}>Close</Button>
                 </div>
     }
     else{
-        return <Row>{galleryItem}</Row>
+        return <div>{galleryItem}</div>
     }
 }
 

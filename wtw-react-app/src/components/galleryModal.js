@@ -50,6 +50,6 @@ const GModal = (props) => {
             </Container>
                 
     
-    return <Container>{posterModal}</Container>
+    return <Container style={{background: '#c4c4b0'}}>{posterModal}</Container>
 }
 export default GModal;
