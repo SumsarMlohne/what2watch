@@ -13,6 +13,7 @@ import Suggestions from './suggestions';
 
 class Main extends Component{
     
+    
     api_key = "876cadf8";
 
     constructor(props){
