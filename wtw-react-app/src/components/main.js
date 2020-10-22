@@ -23,6 +23,7 @@ class Main extends Component{
             isLoaded: false,
             searchValue: '',
             isOpen: false,
+            showRt: false,
             firstMovieTitle: '',
             firstMovieRelease: '',
             firstMovieGenre: '',
@@ -73,6 +74,7 @@ class Main extends Component{
     handleButtonPress = () => {
         this.setState({
             searchValue: this.searchValue.value,
+            showRt: true
             
         }, () => {
             if(this.state.searchValue !== ''){
@@ -119,6 +121,7 @@ class Main extends Component{
         
 
         const {isOpen, showGallery} = this.state;
+        const{showRt} = this.state;
 
         if(showGallery){
             return(
@@ -130,7 +133,7 @@ class Main extends Component{
         else{
         return(
         <div className="Main" style={{background: '#F5F5DC'}} >
-            <h1>Movie To Watch</h1>
+            <h1>What 2 Watch</h1>
             <Container style={{paddingTop: '3em'}}>
                 <Row>
                     <Col sm={2}>
@@ -139,26 +142,31 @@ class Main extends Component{
                     <Col sm={8}>
                         <FormGroup onSubmit={this.handleButtonPress}>
                             <InputGroup className="mb-3">
-                            <FormControl type="text"  ref={input => this.searchValue = input} placeholder="Ex. Star Wars" id="search" onChange={this.getSuggestions} onKeyPress={this.handleKeyPress} ></FormControl> 
-                            <br />   
-                            <InputGroup.Append>
-                                <Button type="button" block variant="dark"  onClick={this.handleButtonPress} >Search</Button>
-                            </InputGroup.Append>
-                            
-                        </InputGroup>
+                                <FormControl type="text"  ref={input => this.searchValue = input} placeholder="Ex. Star Wars" id="search" onChange={this.getSuggestions} onKeyPress={this.handleKeyPress} ></FormControl> 
+                                <br />   
+                                <InputGroup.Append>
+                                    <Button type="button" block variant="danger"  onClick={this.handleButtonPress} >Search</Button>
+                                </InputGroup.Append>
+                            </InputGroup>
                             {/*Gets suggestions from the database and displays in a list under the search bar */}
                             <Suggestions listOfSuggestions={this.state.suggestions} />
 
-                            <Button type="button" block variant="info" style={{marginTop: '1em', marginBottom: '1em'}} onClick={this.onOpenModal}>
+                            <Button type="button" block variant="dark" style={{marginTop: '1em', marginBottom: '1em'}} onClick={this.onOpenModal}>
                              Show Current Search
                             </Button>
-                            <Button type="button" block variant="info" onClick={this.onShowGallery}>Show your gallery</Button>                
+                            <Button type="button" block variant="dark" onClick={this.onShowGallery}>Show your gallery</Button>                
                         </FormGroup>
-                        <h1>Related titles to "{this.state.items.Title}"</h1>
-                       
-                            <Posters results={this.state.results}></Posters>
-                        
-                        <br />
+                        <Container>
+                            {showRt ? 
+                                <Container>
+                                    <h1>Related titles to "{this.state.items.Title}"</h1>
+                            
+                                    <Posters results={this.state.results}></Posters>
+                                
+                                    <br /> 
+                                </Container> 
+                            : null}
+                        </Container>
                     </Col>
                     <Col sm={2}>                                           
                                               
@@ -167,7 +175,7 @@ class Main extends Component{
             </Container>
 
       <Modal show={isOpen} onHide={this.onCloseModal} size="lg">
-        <Modal.Header closeButton style={{background: '#b41b1b'}}>
+        <Modal.Header closeButton style={{background: 'white'}}>
           <Modal.Title>{this.state.items.Title}</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{background: '#F5F5DC'}}>
@@ -187,9 +195,9 @@ class Main extends Component{
                 </Row>
             </Container>
         </Modal.Body>
-        <Modal.Footer style={{background: '#b41b1b'}}>
+        <Modal.Footer style={{background: 'white'}}>
             
-            <Button variant="info" size="lg" id="btn" block onClick={this.onSaveMovie}>Save To Gallery</Button>
+            <Button variant="dark" size="lg" id="btn" block onClick={this.onSaveMovie}>Save To Gallery</Button>
            
         </Modal.Footer>
       </Modal>

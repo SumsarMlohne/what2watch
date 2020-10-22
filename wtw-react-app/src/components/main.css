@@ -7,12 +7,11 @@
 h1{
     margin: 0;
     text-align: center;
-    background: #b41b1b;
-    color: white;
+    background: rgb(26, 26, 26);
+    color: #b41b1b;
     padding-top: 1em;
     padding-bottom: 1em;
 }
-
 li{
     text-decoration: none;
     background: #100972;
